@@ -4,7 +4,6 @@ ormconfig.json
 .vscode
 .idea
 typings/
-**/*.js
 **/*.js.map
 output/**/*.*
 .nyc_output/
