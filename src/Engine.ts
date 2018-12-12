@@ -185,6 +185,14 @@ export class Engine {
                 return str;
             }
         });
+
+        Handlebars.registerHelper("ifeq", function(a, b, options) {
+            if (a == b) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        });
+
         Handlebars.registerHelper({
             and: (v1, v2) => v1 && v2,
             eq: (v1, v2) => v1 === v2,

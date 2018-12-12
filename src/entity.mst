@@ -1,4 +1,5 @@
 import {Index,Entity, PrimaryColumn, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, ManyToOne, ManyToMany, JoinColumn, JoinTable, RelationId} from "typeorm";
+import {Contains, IsInt, Length, IsEmail, IsFQDN, IsDate, Min, Max, IsNotEmpty, IsUUID} from "class-validator";
 {{relationImports}}{{#each UniqueImports}}import {{curly true}}{{toEntityName this}}{{curly false}} from "./{{toFileName this}}";
 {{/each}}
 
@@ -8,6 +9,11 @@ import {Index,Entity, PrimaryColumn, PrimaryGeneratedColumn, Column, OneToOne, O
 {{/isPrimaryKey}}{{/Indexes}}export class {{toEntityName EntityName}} {
 {{#Columns}}
 
+    
+   {{#ifeq sqlType "email"}}@IsEmail(){{/ifeq}}
+   {{#ifeq sqlType "date"}}@IsDate(){{/ifeq}}
+   {{#lenght}}@Length(0, {{.}}){{/lenght}}
+   {{^isNullable}}@IsNotEmpty(){{/isNullable}}
    {{^relations}}{{#isGenerated}} @PrimaryGeneratedColumn({
         type:"{{sqlType}}", {{/isGenerated}}{{^isGenerated}} @Column("{{sqlType}}",{ {{#isNullable}}
         nullable:true,{{/isNullable}}{{^isNullable}}
