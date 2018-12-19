@@ -9,8 +9,8 @@ import {Contains, IsInt, Length, IsEmail, IsFQDN, IsDate, Min, Max, IsNotEmpty, 
 {{/isPrimaryKey}}{{/Indexes}}export class {{toEntityName EntityName}} {
 {{#Columns}}
 
-    
-   {{#ifeq sqlType "email"}}@IsEmail(){{/ifeq}}
+
+   {{#ifeq sqlName "email"}}@IsEmail(){{/ifeq}}
    {{#ifeq sqlType "date"}}@IsDate(){{/ifeq}}
    {{#lenght}}@Length(0, {{.}}){{/lenght}}
    {{^isNullable}}@IsNotEmpty(){{/isNullable}}
