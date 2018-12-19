@@ -13,7 +13,7 @@ import {Contains, IsInt, Length, IsEmail, IsFQDN, IsDate, Min, Max, IsNotEmpty, 
    {{#ifeq sqlName "email"}}@IsEmail(){{/ifeq}}
    {{#ifeq sqlType "date"}}@IsDate(){{/ifeq}}
    {{#lenght}}@Length(0, {{.}}){{/lenght}}
-   {{^isNullable}}@IsNotEmpty(){{/isNullable}}
+   {{^relations}}{{^isNullable}}@IsNotEmpty({{relatedTable}}){{/isNullable}}{{/relations}}
    {{^relations}}{{#isGenerated}} @PrimaryGeneratedColumn({
         type:"{{sqlType}}", {{/isGenerated}}{{^isGenerated}} @Column("{{sqlType}}",{ {{#isNullable}}
         nullable:true,{{/isNullable}}{{^isNullable}}
